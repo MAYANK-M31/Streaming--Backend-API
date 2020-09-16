@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Data = require("../modal/musicmodal");
+const ArtistData = require("../modal/artistsmodal")
 const fs = require('fs');
-
+const _ = require("underscore")
 
 
 
@@ -87,7 +88,7 @@ router.post("/upload", (req, res) => {
             // console.log(song)
             const path = './songs/' + song.name
             const data = new Data({
-                url: song.name.replace(".mp3",""),
+                url: song.name.replace(".mp3", ""),
                 title: req.body.title,
                 album: req.body.album,
                 artist: req.body.artist,
@@ -95,7 +96,7 @@ router.post("/upload", (req, res) => {
             })
 
             data.save()
-            .then(() => res.json({ message: "uploaded successfully", data: data }))
+                .then(() => res.json({ message: "uploaded successfully", data: data }))
 
             song.mv(path, (error) => {
                 if (error) {
@@ -108,11 +109,23 @@ router.post("/upload", (req, res) => {
         } else {
             console.log("failed to upload")
         }
-       
+
     } catch (err) {
         console.log({ message: err })
     }
 
+})
+
+// To send Artists Images 
+
+router.get("/artist/search/:artistname",async (req, res) => {
+    try {
+        const regex = RegExp(`^${req.params.artistname}`, 'gi')
+        const data =await ArtistData.find({artist:regex})
+        res.send(data)
+    } catch (err) {
+        console.log({ message: err })
+    }
 })
 
 
