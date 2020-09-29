@@ -5,7 +5,7 @@ const fs = require("fs");
 const bodyparser = require("body-parser");
 const cors = require("cors");
 const fileupload = require("express-fileupload")
-
+const port = process.env.PORT || 8080;
 
 // MIDDLEWARE
 app.use(cors())
@@ -15,8 +15,8 @@ app.use(fileupload({useTempFiles : true}));
 app.use(express.static(__dirname));
 app.use(express.json())
 
-app.listen("5000", (req, res) => {
-    console.log("server is started on port 5000")
+app.listen(port, (req, res) => {
+    console.log("server is started on port "+port)
 })
 
 // password = FXDHPcgV7VrwydPS

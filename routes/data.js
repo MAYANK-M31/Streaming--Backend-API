@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
     }
-})
+}) 
 
 // to get data by song name
 router.get('/:songname', async (req, res) => {
