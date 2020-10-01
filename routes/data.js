@@ -88,7 +88,7 @@ router.post("/upload", (req, res) => {
             // console.log(song)
             const path = './songs/' + song.name
             const data = new Data({
-                url: song.name.replace(".mp3", ""),
+                url: "https://song-streamer.herokuapp.com/"+song.name.replace(".mp3", ""),
                 title: req.body.title,
                 album: req.body.album,
                 artist: req.body.artist,
