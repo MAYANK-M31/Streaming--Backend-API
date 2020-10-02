@@ -128,6 +128,28 @@ router.get("/artist/search/:artistname",async (req, res) => {
     }
 })
 
+// To send all Artists for trending artists
+
+router.get("/artist/searchall/",async (req, res) => {
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+
+        return array
+    }
+    
+
+    try {
+        const data =await ArtistData.find()
+        shuffleArray(data)
+        res.send(data)
+    } catch (err) {
+        console.log({ message: err })
+    }
+})
+
 
 
 
